@@ -36,5 +36,11 @@ jobs:
           echo test, and deploy your project.
       
       # Runs a single command using the Powershell
-      - powershell: |
-            Invoke-RestMethod -Uri "https://prices.azure.com/api/retail/prices"
+  - task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: | $a = Invoke-RestMethod -Uri "https://prices.azure.com/api/retail/prices"
+$b = $a.Items
+$c = $b.productname
+  
+    
