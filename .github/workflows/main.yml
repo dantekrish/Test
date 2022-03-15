@@ -34,22 +34,12 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-          
-       # Runs a set of commands using the runners shell   
-       - name: Download and Add Powershell Key to Apt-Get Keyring
-            apt_key:
-            url: "https://packages.microsoft.com/keys/microsoft.asc"
-            state: present
+      - name: Powershell script
+        shell:  pwsh
+        run: |
+          $a = Invoke-RestMethod -Uri "https://prices.azure.com/api/retail/prices"
+          $b = $a.Items
+          $c = $b.productname
+          $c
 
-          - name: Add Powershell Repository into /etc/apt/sources.list - Bionic
-            apt_repository:
-            repo: 'deb [arch=amd64] https://packages.microsoft.com/ubuntu/18.04/prod bionic main'
-            state: present    
-          
-          - name: Install Powershell
-            apt:
-            pkg: powershell
-            state: latest
-            force: yes
-  
     
