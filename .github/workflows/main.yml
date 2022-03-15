@@ -29,5 +29,6 @@ jobs:
           $getdata = Invoke-RestMethod -Uri "https://prices.azure.com/api/retail/prices" -Method Get -ContentType "application/json"
           $collection = $getdata.Items | Where-Object {($_.servicename -eq 'Azure App Service')-and ($_.productName -eq 'Azure App Service Premium Windows Container Plan') -and ($_.unitOfMeasure -eq '1 Hour') -and ($_.location -eq 'US East')} | Select-Object -Property Productname,unitofmeasure,unitprice
           Write-Host "App service pricing for "$collection.unitofmeasure" is "$collection.unitprice""
+          $PSVersionTable
 
     
